@@ -124,6 +124,7 @@ h1 {
 
 .message__header {
   font-size: 14px;
+  font-weight: normal;
 }
 
 .message__container-yourself {

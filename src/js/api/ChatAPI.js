@@ -1,5 +1,5 @@
 import createRequest from './createRequest';
-const HOST = 'http://localhost:3000/'
+const HOST = 'https://chat-backend-fvcz.onrender.com/';
 
 export default class ChatAPI {
 
@@ -14,7 +14,7 @@ export default class ChatAPI {
   }
 
   start(callback) {
-    this.ws = new WebSocket('ws://localhost:3000/ws');
+    this.ws = new WebSocket('ws://chat-backend-fvcz.onrender.com/ws');
     this.ws.addEventListener('message', (e) => {
       const data = JSON.parse(e.data);
       callback(data);
@@ -41,7 +41,9 @@ export default class ChatAPI {
       },
       type: 'exit',
     });
+    if (this.ws) {
     this.ws.send(jsonMessage);
     this.ws.close();
+    }
   }
 }

@@ -59,6 +59,10 @@
     outline: none;
     border: 1px solid #20b1df;
   }
+
+  .modal__warning {
+    color:crimson;
+  }
   
   .btn__continue {
     display: block;

@@ -18,6 +18,9 @@ export default class Chat {
     this.onEnterChatHandler = this.onEnterChatHandler.bind(this);
     this.modalFormGroupEl.addEventListener('submit', this.onEnterChatHandler);
     this.modalInputEl = this.container.querySelector('.modal__input');
+    this.onFocusModalInputEl = this.onFocusModalInputEl.bind(this);
+    this.modalInputEl.addEventListener('focus', this.onFocusModalInputEl);
+    this.modalWarningEl = this.container.querySelector('.modal__warning');
     this.btnChatDisconnectEl = this.container.querySelector('.chat__disconnect');
     this.closeChat = this.closeChat.bind(this);
     this.btnChatDisconnectEl.addEventListener('click', this.closeChat);
@@ -43,9 +46,9 @@ export default class Chat {
     this.userName = this.modalInputEl.value;
     this.api.create(this.userName, (res) => {
       if (res.status !== 'ok') {
+        this.renderWarning();
         return;
       }
-      console.log('ok');
       this.startChat();
     });
   }
@@ -69,6 +72,16 @@ export default class Chat {
       chatUserEl.id = el.id;
       this.chatUserListEl.insertAdjacentElement('afterbegin', chatUserEl);
     });
+  }
+
+  onFocusModalInputEl() {
+    this.modalWarningEl.classList.add('hidden');
+    this.modalInputEl.value = '';
+  }
+
+  renderWarning() {
+    this.modalWarningEl.classList.remove('hidden');
+    this.renderModalForm();
   }
 
   sendMessage(e) {
