@@ -19,9 +19,8 @@ const createRequest = (options = {}) => {
     xhr.open(options.requestMethod, url);
     xhr.send(JSON.stringify(options.body));
   } catch (error) {
-    console.log('error');
+    console.log("error");
   }
-  
 };
 
 export default createRequest;

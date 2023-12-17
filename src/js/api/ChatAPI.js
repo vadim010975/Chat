@@ -1,8 +1,7 @@
-import createRequest from './createRequest';
-const HOST = 'https://chat-backend-fvcz.onrender.com/';
+import createRequest from "./createRequest";
+const HOST = "https://chat-backend-fvcz.onrender.com/";
 
 export default class ChatAPI {
-
   create(userName, callback) {
     createRequest({
       requestMethod: "POST",
@@ -14,8 +13,8 @@ export default class ChatAPI {
   }
 
   start(callback) {
-    this.ws = new WebSocket('ws://chat-backend-fvcz.onrender.com/ws');
-    this.ws.addEventListener('message', (e) => {
+    this.ws = new WebSocket("ws://chat-backend-fvcz.onrender.com/ws");
+    this.ws.addEventListener("message", (e) => {
       const data = JSON.parse(e.data);
       callback(data);
     });
@@ -26,7 +25,7 @@ export default class ChatAPI {
       return;
     }
     const jsonMessage = JSON.stringify({
-      type: 'send',
+      type: "send",
       text: message.text,
       name: message.name,
       date: message.date,
@@ -39,11 +38,11 @@ export default class ChatAPI {
       user: {
         name: userName,
       },
-      type: 'exit',
+      type: "exit",
     });
     if (this.ws) {
-    this.ws.send(jsonMessage);
-    this.ws.close();
+      this.ws.send(jsonMessage);
+      this.ws.close();
     }
   }
 }
