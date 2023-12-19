@@ -13,7 +13,7 @@ export default class ChatAPI {
   }
 
   start(callback) {
-    this.ws = new WebSocket("ws://chat-backend-fvcz.onrender.com/ws");
+    this.ws = new WebSocket("wss://chat-backend-fvcz.onrender.com/ws");
     this.ws.addEventListener("message", (e) => {
       const data = JSON.parse(e.data);
       callback(data);
